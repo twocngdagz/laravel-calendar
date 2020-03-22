@@ -20,10 +20,9 @@ import '@fullcalendar/daygrid/main.css';
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('fullcalender', FullCalendar)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,7 +34,11 @@ const app = new Vue({
     el: '#app',
     data() {
         return {
-            calendarPlugins: [ dayGridPlugin ]
+            calendarPlugins: [ dayGridPlugin ],
+            events: [
+                { title: 'event 1', date: '2020-03-01' },
+                { title: 'event 2', date: '2020-03-02' }
+            ]
         }
     }
 });

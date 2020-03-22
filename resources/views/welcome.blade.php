@@ -4,16 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
-
+            <calendar-form></calendar-form>
         </div>
         <div class="col-md-8">
             <fullcalender
                 defaultView="dayGridMonth"
                 :plugins="calendarPlugins"
-                :events="[
-                    { title: 'event 1', date: '2020-03-01' },
-                    { title: 'event 2', date: '2020-03-02' }
-                ]">
+                :events="events">
             </fullcalender>
         </div>
     </div>
