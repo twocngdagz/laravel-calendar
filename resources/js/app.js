@@ -35,10 +35,23 @@ const app = new Vue({
     data() {
         return {
             calendarPlugins: [ dayGridPlugin ],
-            events: [
-                { title: 'event 1', date: '2020-03-01' },
-                { title: 'event 2', date: '2020-03-02' }
-            ]
+            events: null
         }
+    },
+    methods: {
+        fetchEvents() {
+            axios.get('/api/events')
+            .then(response => {
+                console.log(response.data)
+                this.events = response.data
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+    },
+    created()
+    {
+        this.fetchEvents()
     }
 });

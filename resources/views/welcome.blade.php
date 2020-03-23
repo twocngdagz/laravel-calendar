@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <calendar-form></calendar-form>
+            <calendar-form @refresh="fetchEvents()"></calendar-form>
         </div>
         <div class="col-md-8">
             <fullcalender
-                defaultView="dayGridMonth"
+                default-view="dayGridMonth"
                 :plugins="calendarPlugins"
-                :events="events">
+                :events="events" >
             </fullcalender>
         </div>
     </div>

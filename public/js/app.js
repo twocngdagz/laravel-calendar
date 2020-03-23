@@ -12891,6 +12891,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -12951,20 +12953,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
-      name: "",
-      from: "",
-      to: ""
+      form: {
+        Monday: false,
+        Tuesday: false,
+        Wednesday: false,
+        Thursday: false,
+        Friday: false,
+        Saturday: false,
+        Sunday: false,
+        title: "",
+        from: "",
+        to: ""
+      }
     };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/events', this.form).then(function (response) {
+        _this.$emit('refresh');
+      });
+    }
   }
 });
 
@@ -67979,19 +67993,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
+            value: _vm.form.title,
+            expression: "form.title"
           }
         ],
         staticClass: "form-control",
         attrs: { type: "text" },
-        domProps: { value: _vm.name },
+        domProps: { value: _vm.form.title },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.name = $event.target.value
+            _vm.$set(_vm.form, "title", $event.target.value)
           }
         }
       })
@@ -68007,11 +68021,11 @@ var render = function() {
           staticClass: "form-control",
           attrs: { options: { firstDay: 0 } },
           model: {
-            value: _vm.from,
+            value: _vm.form.from,
             callback: function($$v) {
-              _vm.from = $$v
+              _vm.$set(_vm.form, "from", $$v)
             },
-            expression: "from"
+            expression: "form.from"
           }
         })
       ],
@@ -68028,11 +68042,11 @@ var render = function() {
           staticClass: "form-control",
           attrs: { options: { firstDay: 0 } },
           model: {
-            value: _vm.to,
+            value: _vm.form.to,
             callback: function($$v) {
-              _vm.to = $$v
+              _vm.$set(_vm.form, "to", $$v)
             },
-            expression: "to"
+            expression: "form.to"
           }
         })
       ],
@@ -68045,33 +68059,84 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.monday,
-            expression: "monday"
+            value: _vm.form.Sunday,
+            expression: "form.Sunday"
           }
         ],
         staticClass: "form-check-input",
         attrs: { type: "checkbox" },
         domProps: {
-          checked: Array.isArray(_vm.monday)
-            ? _vm._i(_vm.monday, null) > -1
-            : _vm.monday
+          checked: Array.isArray(_vm.form.Sunday)
+            ? _vm._i(_vm.form.Sunday, null) > -1
+            : _vm.form.Sunday
         },
         on: {
           change: function($event) {
-            var $$a = _vm.monday,
+            var $$a = _vm.form.Sunday,
               $$el = $event.target,
               $$c = $$el.checked ? true : false
             if (Array.isArray($$a)) {
               var $$v = null,
                 $$i = _vm._i($$a, $$v)
               if ($$el.checked) {
-                $$i < 0 && (_vm.monday = $$a.concat([$$v]))
+                $$i < 0 && _vm.$set(_vm.form, "Sunday", $$a.concat([$$v]))
               } else {
                 $$i > -1 &&
-                  (_vm.monday = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  _vm.$set(
+                    _vm.form,
+                    "Sunday",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
               }
             } else {
-              _vm.monday = $$c
+              _vm.$set(_vm.form, "Sunday", $$c)
+            }
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("label", { staticClass: "form-check-label" }, [
+        _vm._v("\n            Sunday\n        ")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-check" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.form.Monday,
+            expression: "form.Monday"
+          }
+        ],
+        staticClass: "form-check-input",
+        attrs: { type: "checkbox" },
+        domProps: {
+          checked: Array.isArray(_vm.form.Monday)
+            ? _vm._i(_vm.form.Monday, null) > -1
+            : _vm.form.Monday
+        },
+        on: {
+          change: function($event) {
+            var $$a = _vm.form.Monday,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false
+            if (Array.isArray($$a)) {
+              var $$v = null,
+                $$i = _vm._i($$a, $$v)
+              if ($$el.checked) {
+                $$i < 0 && _vm.$set(_vm.form, "Monday", $$a.concat([$$v]))
+              } else {
+                $$i > -1 &&
+                  _vm.$set(
+                    _vm.form,
+                    "Monday",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
+              }
+            } else {
+              _vm.$set(_vm.form, "Monday", $$c)
             }
           }
         }
@@ -68088,33 +68153,37 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.tuesday,
-            expression: "tuesday"
+            value: _vm.form.Tuesday,
+            expression: "form.Tuesday"
           }
         ],
         staticClass: "form-check-input",
         attrs: { type: "checkbox" },
         domProps: {
-          checked: Array.isArray(_vm.tuesday)
-            ? _vm._i(_vm.tuesday, null) > -1
-            : _vm.tuesday
+          checked: Array.isArray(_vm.form.Tuesday)
+            ? _vm._i(_vm.form.Tuesday, null) > -1
+            : _vm.form.Tuesday
         },
         on: {
           change: function($event) {
-            var $$a = _vm.tuesday,
+            var $$a = _vm.form.Tuesday,
               $$el = $event.target,
               $$c = $$el.checked ? true : false
             if (Array.isArray($$a)) {
               var $$v = null,
                 $$i = _vm._i($$a, $$v)
               if ($$el.checked) {
-                $$i < 0 && (_vm.tuesday = $$a.concat([$$v]))
+                $$i < 0 && _vm.$set(_vm.form, "Tuesday", $$a.concat([$$v]))
               } else {
                 $$i > -1 &&
-                  (_vm.tuesday = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  _vm.$set(
+                    _vm.form,
+                    "Tuesday",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
               }
             } else {
-              _vm.tuesday = $$c
+              _vm.$set(_vm.form, "Tuesday", $$c)
             }
           }
         }
@@ -68131,33 +68200,37 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.wednesday,
-            expression: "wednesday"
+            value: _vm.form.Wednesday,
+            expression: "form.Wednesday"
           }
         ],
         staticClass: "form-check-input",
         attrs: { type: "checkbox" },
         domProps: {
-          checked: Array.isArray(_vm.wednesday)
-            ? _vm._i(_vm.wednesday, null) > -1
-            : _vm.wednesday
+          checked: Array.isArray(_vm.form.Wednesday)
+            ? _vm._i(_vm.form.Wednesday, null) > -1
+            : _vm.form.Wednesday
         },
         on: {
           change: function($event) {
-            var $$a = _vm.wednesday,
+            var $$a = _vm.form.Wednesday,
               $$el = $event.target,
               $$c = $$el.checked ? true : false
             if (Array.isArray($$a)) {
               var $$v = null,
                 $$i = _vm._i($$a, $$v)
               if ($$el.checked) {
-                $$i < 0 && (_vm.wednesday = $$a.concat([$$v]))
+                $$i < 0 && _vm.$set(_vm.form, "Wednesday", $$a.concat([$$v]))
               } else {
                 $$i > -1 &&
-                  (_vm.wednesday = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  _vm.$set(
+                    _vm.form,
+                    "Wednesday",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
               }
             } else {
-              _vm.wednesday = $$c
+              _vm.$set(_vm.form, "Wednesday", $$c)
             }
           }
         }
@@ -68174,33 +68247,37 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.thursday,
-            expression: "thursday"
+            value: _vm.form.Thursday,
+            expression: "form.Thursday"
           }
         ],
         staticClass: "form-check-input",
         attrs: { type: "checkbox" },
         domProps: {
-          checked: Array.isArray(_vm.thursday)
-            ? _vm._i(_vm.thursday, null) > -1
-            : _vm.thursday
+          checked: Array.isArray(_vm.form.Thursday)
+            ? _vm._i(_vm.form.Thursday, null) > -1
+            : _vm.form.Thursday
         },
         on: {
           change: function($event) {
-            var $$a = _vm.thursday,
+            var $$a = _vm.form.Thursday,
               $$el = $event.target,
               $$c = $$el.checked ? true : false
             if (Array.isArray($$a)) {
               var $$v = null,
                 $$i = _vm._i($$a, $$v)
               if ($$el.checked) {
-                $$i < 0 && (_vm.thursday = $$a.concat([$$v]))
+                $$i < 0 && _vm.$set(_vm.form, "Thursday", $$a.concat([$$v]))
               } else {
                 $$i > -1 &&
-                  (_vm.thursday = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  _vm.$set(
+                    _vm.form,
+                    "Thursday",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
               }
             } else {
-              _vm.thursday = $$c
+              _vm.$set(_vm.form, "Thursday", $$c)
             }
           }
         }
@@ -68217,33 +68294,37 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.friday,
-            expression: "friday"
+            value: _vm.form.Friday,
+            expression: "form.Friday"
           }
         ],
         staticClass: "form-check-input",
         attrs: { type: "checkbox" },
         domProps: {
-          checked: Array.isArray(_vm.friday)
-            ? _vm._i(_vm.friday, null) > -1
-            : _vm.friday
+          checked: Array.isArray(_vm.form.Friday)
+            ? _vm._i(_vm.form.Friday, null) > -1
+            : _vm.form.Friday
         },
         on: {
           change: function($event) {
-            var $$a = _vm.friday,
+            var $$a = _vm.form.Friday,
               $$el = $event.target,
               $$c = $$el.checked ? true : false
             if (Array.isArray($$a)) {
               var $$v = null,
                 $$i = _vm._i($$a, $$v)
               if ($$el.checked) {
-                $$i < 0 && (_vm.friday = $$a.concat([$$v]))
+                $$i < 0 && _vm.$set(_vm.form, "Friday", $$a.concat([$$v]))
               } else {
                 $$i > -1 &&
-                  (_vm.friday = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  _vm.$set(
+                    _vm.form,
+                    "Friday",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
               }
             } else {
-              _vm.friday = $$c
+              _vm.$set(_vm.form, "Friday", $$c)
             }
           }
         }
@@ -68260,33 +68341,37 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.saturday,
-            expression: "saturday"
+            value: _vm.form.Saturday,
+            expression: "form.Saturday"
           }
         ],
         staticClass: "form-check-input",
         attrs: { type: "checkbox" },
         domProps: {
-          checked: Array.isArray(_vm.saturday)
-            ? _vm._i(_vm.saturday, null) > -1
-            : _vm.saturday
+          checked: Array.isArray(_vm.form.Saturday)
+            ? _vm._i(_vm.form.Saturday, null) > -1
+            : _vm.form.Saturday
         },
         on: {
           change: function($event) {
-            var $$a = _vm.saturday,
+            var $$a = _vm.form.Saturday,
               $$el = $event.target,
               $$c = $$el.checked ? true : false
             if (Array.isArray($$a)) {
               var $$v = null,
                 $$i = _vm._i($$a, $$v)
               if ($$el.checked) {
-                $$i < 0 && (_vm.saturday = $$a.concat([$$v]))
+                $$i < 0 && _vm.$set(_vm.form, "Saturday", $$a.concat([$$v]))
               } else {
                 $$i > -1 &&
-                  (_vm.saturday = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  _vm.$set(
+                    _vm.form,
+                    "Saturday",
+                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                  )
               }
             } else {
-              _vm.saturday = $$c
+              _vm.$set(_vm.form, "Saturday", $$c)
             }
           }
         }
@@ -68297,52 +68382,18 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-check" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.sunday,
-            expression: "sunday"
-          }
-        ],
-        staticClass: "form-check-input",
-        attrs: { type: "checkbox" },
-        domProps: {
-          checked: Array.isArray(_vm.sunday)
-            ? _vm._i(_vm.sunday, null) > -1
-            : _vm.sunday
-        },
-        on: {
-          change: function($event) {
-            var $$a = _vm.sunday,
-              $$el = $event.target,
-              $$c = $$el.checked ? true : false
-            if (Array.isArray($$a)) {
-              var $$v = null,
-                $$i = _vm._i($$a, $$v)
-              if ($$el.checked) {
-                $$i < 0 && (_vm.sunday = $$a.concat([$$v]))
-              } else {
-                $$i > -1 &&
-                  (_vm.sunday = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-              }
-            } else {
-              _vm.sunday = $$c
-            }
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("label", { staticClass: "form-check-label" }, [
-        _vm._v("\n            Sunday\n        ")
-      ])
-    ]),
-    _vm._v(" "),
     _c(
       "button",
-      { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "submit" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
+      },
       [_vm._v("Submit")]
     )
   ])
@@ -80673,14 +80724,23 @@ var app = new Vue({
   data: function data() {
     return {
       calendarPlugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"]],
-      events: [{
-        title: 'event 1',
-        date: '2020-03-01'
-      }, {
-        title: 'event 2',
-        date: '2020-03-02'
-      }]
+      events: null
     };
+  },
+  methods: {
+    fetchEvents: function fetchEvents() {
+      var _this = this;
+
+      axios.get('/api/events').then(function (response) {
+        console.log(response.data);
+        _this.events = response.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  },
+  created: function created() {
+    this.fetchEvents();
   }
 });
 
