@@ -27,7 +27,7 @@
         "@fullcalendar/core": "^4.4.0",
         "@fullcalendar/daygrid": "^4.4.0",
         "@fullcalendar/vue": "^4.4.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "pikaday": "^1.8.0"
     }
 }
